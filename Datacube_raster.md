@@ -23,7 +23,7 @@ grid <- st_read("filepath here")
 # convert raster data to H3 grid using zonal statistics
 ```
 tic()
-calc <- exactextractr::exact_extract(r, grid, c("majority", "minority"))
+calc <- exactextractr::exact_extract(r, grid, c("majority", "minority", "max", "min", "mean"))
 toc()
 
 dropnames <- colnames(calc)
@@ -32,7 +32,7 @@ dropnames <- colnames(calc)
 # prepare lookup table to join zonal statistics with H3 grid
 ```
 forbind <-	  calc %>%
-		          mutate(majority = majority, minority = minority) %>%
+		          mutate(majority = majority, minority = minority, maximum = max, minimum = min, mean = mean) %>%
 		          dplyr::select(-all_of(dropnames))
 ```
 
