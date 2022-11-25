@@ -13,12 +13,13 @@ library(rnaturalearth)		#for world polygons
 # fix geometries 
 # fix geometries wrapping around dateline
 # dissolve remaining country borders using using sf::union
-mypoly <- 	ne_countries(scale = "large", type = "countries", returnclass = c("sf")) %>%
-		filter(!admin == "Antarctica") %>%
-		st_make_valid() %>%
-		st_shift_longitude() %>% 
-  		st_wrap_dateline() %>%
-		st_union()
+mypoly <- 	
+ne_countries(scale = "large", type = "countries", returnclass = c("sf")) %>%
+filter(!admin == "Antarctica") %>%
+st_make_valid() %>%
+st_shift_longitude() %>% 
+st_wrap_dateline() %>%
+st_union()
 
 plot(mypoly)
 ```
