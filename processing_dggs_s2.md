@@ -41,18 +41,28 @@ mys2
 # convert list to vector of s2 cell ids
 mys2_cell <- unlist(mys2)
 
+# calculate s2 cell centers
+# convert to sf points
+# extract longitude and latitude coordinates
+mypoints <- s2_cell_to_lnglat(mys2_cell)
+mypoints_sf <- st_as_sf(mypoints)
+mylongitude <- as.numeric(st_coordinates(mypoints_sf)[,1])
+mylatitude <- as.numeric(st_coordinates(mypoints_sf)[,2])
+
 # convert vector of s2 cell ids to polygons 
 mys2_geo <- s2_cell_polygon(mys2_cell)
 ```
 
 # generate s2 polygon grid
 ```
-# convert s2 geography to sf polygon
+# convert s2 geography to sf polygons
 # correct geometries
 # correct polygon wrapping around dateline
 mygrid <- 	
 st_as_sf(mys2_geo) %>%
 mutate(s2_id = as.character(mys2_cell)) %>%
+mutate(s2_longitude = mylongitude) %>%
+mutate(s2_latitude = mylatitude) %>%
 st_make_valid() %>%
 st_wrap_dateline()
 
