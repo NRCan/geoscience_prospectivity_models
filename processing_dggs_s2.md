@@ -6,7 +6,7 @@ library(tidyverse)		#for data munging
 library(rnaturalearth)		#for world polygons
 ```
 
-# generate polygon
+# generate polygon template
 ```
 # generate world map polygons using rnaturalearth::ne_countries
 # exclude Antarctica
@@ -23,7 +23,7 @@ mypoly <- 	ne_countries(scale = "large", type = "countries", returnclass = c("sf
 plot(mypoly)
 ```
 
-# calculate s2 cells
+# calculate s2 cells for polygon template
 ```
 # use sf polygon to find overlapping s2 cells
 mys2 <- 
