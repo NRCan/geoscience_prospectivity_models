@@ -48,7 +48,8 @@ mys2_geo <- s2_cell_polygon(mys2_cell)
 ```
 
 # convert s2 geography to sf polygon
-# creates wrapping artefacts for global data
+# correct geometries
+# correct polygon wrapping around dateline
 ```
 mygrid <- 	
 st_as_sf(mys2_geo) %>%
