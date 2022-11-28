@@ -71,6 +71,6 @@ mygrid <-       st_as_sf(mys2_geo) %>%
                 st_wrap_dateline()
 
 plot(mygrid)
-```
 
 st_write(mygrid, delete_layer = TRUE, "file name here.gpkg)"
+```
