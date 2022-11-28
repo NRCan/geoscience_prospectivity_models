@@ -6,7 +6,7 @@ library(tidyverse)		#for data munging
 library(rnaturalearth)		#for world polygons
 ```
 
-# generate polygon template
+# generate global polygon template
 ```
 # generate world map polygons using rnaturalearth::ne_countries
 # exclude Antarctica
@@ -20,6 +20,12 @@ mypoly <-     ne_countries(scale = "large", type = "countries", returnclass = c(
               st_wrap_dateline() %>%
               st_union()
 
+plot(mypoly)
+```
+
+# generate Canada polygon template
+```
+mypoly <- 	ne_countries(scale = "large", country = "Canada", returnclass = c("sf"))
 plot(mypoly)
 ```
 
