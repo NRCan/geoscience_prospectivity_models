@@ -6,7 +6,7 @@ library(tidyverse)		#for data munging
 library(rnaturalearth)		#for world polygons
 ```
 
-# generate global polygon template
+# generate global polygon template 
 ```
 # generate world map polygons using rnaturalearth::ne_countries
 # exclude Antarctica
@@ -30,6 +30,7 @@ plot(mypoly)
 ```
 
 # calculate s2 cells for polygon template
+# s2 cell statistics are here https://s2geometry.io/resources/s2cell_statistics.html
 ```
 # use sf polygon to find overlapping s2 cells
 mys2 <-       s2_covering_cell_ids(
