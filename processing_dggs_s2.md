@@ -26,31 +26,30 @@ plot(mypoly)
 # calculate s2 cells for polygon template
 ```
 # use sf polygon to find overlapping s2 cells
-mys2 <- 
-s2_covering_cell_ids(
-mypoly,
-min_level = 11,
-max_level = 11,
-max_cells = 100,
-buffer = 0,
-interior = FALSE,
-radius = s2_earth_radius_meters())
+mys2 <-       s2_covering_cell_ids(
+              mypoly,
+              min_level = 11,
+              max_level = 11,
+              max_cells = 100,
+              buffer = 0,
+              interior = FALSE,
+              radius = s2_earth_radius_meters())
 
 mys2
 
 # convert list to vector of s2 cell ids
-mys2_cell <- unlist(mys2)
+mys2_cell <-    unlist(mys2)
 
 # calculate s2 cell centers
 # convert to sf points
 # extract longitude and latitude coordinates
-mypoints <- s2_cell_to_lnglat(mys2_cell)
-mypoints_sf <- st_as_sf(mypoints)
-mylongitude <- as.numeric(st_coordinates(mypoints_sf)[,1])
-mylatitude <- as.numeric(st_coordinates(mypoints_sf)[,2])
+mypoints <-     s2_cell_to_lnglat(mys2_cell)
+mypoints_sf <-  st_as_sf(mypoints)
+mylongitude <-  as.numeric(st_coordinates(mypoints_sf)[,1])
+mylatitude <-   as.numeric(st_coordinates(mypoints_sf)[,2])
 
 # convert vector of s2 cell ids to polygons 
-mys2_geo <- s2_cell_polygon(mys2_cell)
+mys2_geo <-     s2_cell_polygon(mys2_cell)
 ```
 
 # generate s2 polygon grid
@@ -58,13 +57,12 @@ mys2_geo <- s2_cell_polygon(mys2_cell)
 # convert s2 geography to sf polygons
 # correct geometries
 # correct polygon wrapping around dateline
-mygrid <- 	
-st_as_sf(mys2_geo) %>%
-mutate(s2_id = as.character(mys2_cell)) %>%
-mutate(s2_longitude = mylongitude) %>%
-mutate(s2_latitude = mylatitude) %>%
-st_make_valid() %>%
-st_wrap_dateline()
+mygrid <-       st_as_sf(mys2_geo) %>%
+                mutate(s2_id = as.character(mys2_cell)) %>%
+                mutate(s2_longitude = mylongitude) %>%
+                mutate(s2_latitude = mylatitude) %>%
+                st_make_valid() %>%
+                st_wrap_dateline()
 
 plot(mygrid)
 ```
